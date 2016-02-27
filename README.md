@@ -1,4 +1,4 @@
-# mickalene-thomas
+# Redux boilerplate
 
 to run app:  
 ```
