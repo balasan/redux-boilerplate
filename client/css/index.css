@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    height: calc(100% - 75px);
+    background: black;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: sans-serif;
+    height: 100%;
+}
+
+body{
+
+}
+
+button:focus, input[type="button"]:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+main {
+
+}
+
+
+#app{
+    position:relative;
+}
+
