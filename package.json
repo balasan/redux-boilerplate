@@ -4,6 +4,7 @@
   "description": "An example of a universally-rendered Redux application",
   "scripts": {
     "start": "node server/index.js",
+    "dev": "nodemon server/index.js",
     "build": "webpack --config ./webpack.production.config.js --progress --colors -p",
     "build-dev": "webpack --config ./webpack.config.js --progress --colors -p"
   },
@@ -30,6 +31,7 @@
     "history": "^2.0.0",
     "json-loader": "^0.5.4",
     "morgan": "^1.6.1",
+    "nodemon": "^1.9.1",
     "qs": "^4.0.0",
     "react": "^0.14.0",
     "react-addons-css-transition-group": "^0.14.3",

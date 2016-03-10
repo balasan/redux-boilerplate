@@ -6,20 +6,24 @@ import createHistory from 'history/lib/createMemoryHistory';
 import qs from 'qs';
 import routes from '../common/routes';
 import configureStore from '../common/store/configureStore';
-import App from '../common/containers/App';
-// import { fetchCounter } from '../common/api/counter';
+import App from '../common/components/app';
 
 function renderFullPage(html, initialState) {
+
+  var styles;
+  //load extracted styles in head when in production
+  if(process.env.NODE_ENV == 'development') styles = "";
+  else styles = '<link rel="stylesheet" href="/styles.css" />';
+
   return `
     <!doctype html>
     <html>
       <head>
-        <title>Mickalene Thomas</title>
+        <title></title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" href="/styles.css" />
+        ${styles}
       </head>
       <body>
-        <canvas id="webGL"></canvas>
         <div id="app">${html}</div>
          <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
@@ -40,15 +44,8 @@ export default function fetchComponentData(dispatch, components, params) {
 }
 
 export default function handleRender(req, res) {
-  // Query our mock API asynchronously
-  // fetchCounter(apiResult => {
-    // Read the counter from the request, if provided
 
     const params = qs.parse(req.query);
-    // const counter = parseInt(params.counter, 10) || apiResult || 0;
-
-    // Compile an initial state
-    // const initialState = { counter };
 
     // const initialState = {routing : {path: req.originalUrl}};
     const initialState = {};
@@ -69,7 +66,6 @@ export default function handleRender(req, res) {
         } else {
 
           // console.log("RENDERING", req.originalUrl)
-
           var renderHtml = () => {
             const component = (
               <Provider store={store}>

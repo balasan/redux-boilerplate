@@ -9,9 +9,9 @@ var autoprefixer = require('autoprefixer');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  devtool: 'inline-source-map',
+  // devtool: 'inline-source-map',
   entry: [
-    'webpack-hot-middleware/client?reload=true',
+    // 'webpack-hot-middleware/client',
     './client/index.js'
   ],
   output: {
@@ -20,14 +20,14 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    // new webpack.optimize.OccurenceOrderPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
+    // new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("styles.css"),
     new webpack.DefinePlugin({
       "process.env":{
         BROWSER: JSON.stringify(true),
-        DEVTOOLS: JSON.stringify(true)  // <-------- DISABLE redux-devtools HERE
+        NODE_ENV: JSON.stringify('production')
       }
     })
   ],
@@ -41,8 +41,8 @@ module.exports = {
     loaders: [
       {
         test: /\.css$|\.scss$/,
-        loader: 'style-loader!css-loader!postcss-loader'
-        // loader: ExtractTextPlugin.extract('style-loader','css-loader!postcss-loader')
+        // loader: 'style-loader!css-loader!postcss-loader'
+        loader: ExtractTextPlugin.extract('style-loader','css-loader!postcss-loader')
         // loader: 'css?sourceMap!postcss!sass?sourceMap&sourceMapContents',
       },
       {
@@ -53,24 +53,6 @@ module.exports = {
         query: {
           optional: [ 'runtime' ],
           stage: 2,
-          env: {
-            development: {
-              plugins: [
-                'react-transform'
-              ],
-              extra: {
-                'react-transform': {
-                  transforms: [
-                    {
-                      transform:  'react-transform-hmr',
-                      imports: [ 'react' ],
-                      locals:  [ 'module' ]
-                    }
-                  ]
-                }
-              }
-            }
-          }
         }
       }
     ],

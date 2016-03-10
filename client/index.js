@@ -7,7 +7,7 @@ import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import debug from 'debug';
 import createHistory from 'history/lib/createBrowserHistory';
 import configureStore from '../common/store/configureStore';
-import App from '../common/containers/App';
+import App from '../common/components/app';
 
 const clientDebug = debug('app:client');
 const rootElement = document.getElementById('app');

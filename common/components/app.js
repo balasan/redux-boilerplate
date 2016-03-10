@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+if (process.env.BROWSER == true) {
+  require("./index.css");
+  require("./fonts.css");
+}
+
 export default class App extends Component {
   render () {
     return (

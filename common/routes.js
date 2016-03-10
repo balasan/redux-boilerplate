@@ -1,10 +1,10 @@
 import React from 'react';
 
-import App from './containers/App';
-import Home from './containers/Home';
-import About from './containers/About';
-import Counters from './containers/Counters';
-import NotFound from './containers/NotFound';
+import App from './components/app';
+import Home from './components/main/main.container';
+import About from './components/about/about.container';
+import Counters from './components/counter/counter.container';
+import NotFound from './components/404';
 
 var routes = {
   path: '/',
