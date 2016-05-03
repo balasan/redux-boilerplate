@@ -11,6 +11,11 @@
 - MongoDB + api <- not universal (TODO)
 - Socket.io <- needs some more work (TODO)
 
+#####Todos:
+- Test setup (integration almost done)
+- Cleanup Socket.io
+- Universal api middleware
+
 to run app:  
 ```
 npm install
