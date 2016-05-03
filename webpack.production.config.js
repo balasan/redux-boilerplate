@@ -35,10 +35,6 @@ prodConfig.module.loaders = [
     loader: 'babel',
     exclude: /node_modules/,
     include: __dirname,
-    query: {
-      optional: [ 'runtime' ],
-      stage: 2,
-    }
   }
 ];
 
