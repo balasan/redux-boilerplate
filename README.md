@@ -4,9 +4,9 @@
 
 Features:
 - Universal Auth
-- - Facebook
-- - Twitter
-- - Local
+  - Facebook
+  - Twitter
+  - Local
 - Router (react-router-redux TODO replace with just react router?)
 - MongoDB + api <- not universal (TODO)
 - Socket.io <- needs some more work (TODO)
