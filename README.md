@@ -2,7 +2,7 @@
 
 #### As simple as can be universal redux boilerplate project. Inspired by the simplicity of [Redux examples](http://redux.js.org/docs/introduction/Examples.html) and server organization of [Angular Fullstack Generator](https://github.com/angular-fullstack/generator-angular-fullstack) 
 
-Features:
+#####Features:
 - Universal Auth
   - Facebook
   - Twitter
