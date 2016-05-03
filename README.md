@@ -16,7 +16,7 @@
 - Cleanup Socket.io
 - Universal api middleware
 
-to run app:  
+to run the app:  
 ```
 npm install
 ```
