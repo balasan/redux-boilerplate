@@ -2,10 +2,15 @@ import { applyMiddleware, compose, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import rootReducer from '../reducers'
 import { routerMiddleware } from 'react-router-redux'
+import createSocketIoMiddleware from 'redux-socket.io';
+import io from 'socket.io-client';
+
+let socket = io('http://localhost:3000');
 
 export default function configureStore (initialState = {}, history) {
   // Compose final middleware and use devtools in debug environment
-  let middleware = applyMiddleware(thunk, routerMiddleware(history))
+  let socketIoMiddleware = createSocketIoMiddleware(socket, "server/");
+  let middleware = applyMiddleware(thunk, routerMiddleware(history), socketIoMiddleware)
   if (process.env.BROWSER && process.env.DEVTOOLS) {
     const devTools = typeof window === 'object' && typeof window.devToolsExtension !== 'undefined' ? window.devToolsExtension() : f => f
     middleware = compose(middleware, devTools)

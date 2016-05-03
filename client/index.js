@@ -12,10 +12,15 @@ import App from '../common/components/app';
 const clientDebug = debug('app:client');
 const rootElement = document.getElementById('app');
 const routes = require('../common/routes');
+import { getUser } from '../common/actions/auth';
+
 
 window.React = React; // For chrome dev tool support
-window.reduxDebug = debug;
-window.reduxDebug.enable('*'); // this should be activated only on development env
+
+if(process.env.NODE_ENV == 'development') {
+  window.reduxDebug = debug;
+  window.reduxDebug.enable('*'); // this should be activated only on development env
+}
 
 let initialState = window.__INITIAL_STATE__ || undefined;
 const store = configureStore(initialState, browserHistory);
@@ -26,7 +31,7 @@ clientDebug('rehydrating app');
 render(
   <Provider store={store}>
     <div>
-      <Router routes={routes} history={history}/>
+      <Router routes={routes(store)} history={history}/>
     </div>
   </Provider>,
   rootElement

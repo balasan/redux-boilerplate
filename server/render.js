@@ -7,6 +7,8 @@ import qs from 'qs';
 import routes from '../common/routes';
 import configureStore from '../common/store/configureStore';
 import App from '../common/components/app';
+import { setUser } from '../common/actions/auth';
+import cookie from 'react-cookie';
 
 function renderFullPage(html, initialState) {
 
@@ -34,27 +36,31 @@ function renderFullPage(html, initialState) {
     `
 }
 
-export default function fetchComponentData(dispatch, components, params) {
+export default function fetchComponentData(dispatch, components, params, req) {
   const promises = components
     .filter((component) => component && component.fetchData) // 1
     .map((component) => component.fetchData) // 2
-    .map(fetchData =>
-      fetchData(dispatch, params)); // 3
+    .map(fetchData => {
+      console.log(fetchData)
+      return fetchData(dispatch, params, req); // 3
+    })
     return Promise.all(promises);
 }
 
 export default function handleRender(req, res) {
 
     const params = qs.parse(req.query);
+    cookie.plugToRequest(req, res);
 
     // const initialState = {routing : {path: req.originalUrl}};
-    const initialState = {};
+    const initialState = {}
 
     // Create a new Redux store instance
     const store = configureStore(initialState);
+    if(req.user) store.dispatch(setUser(req.user));
 
     match(
-      {routes: routes, location: req.originalUrl},
+      {routes: routes(store), location: req.originalUrl},
       (error, redirectLocation, renderProps) => {
         if (redirectLocation) {
           res.redirect(redirectLocation.pathname + redirectLocation.search);
@@ -76,14 +82,16 @@ export default function handleRender(req, res) {
             );
             return renderToString(component);
           }
-
           //This code pre-fills the data on the server
           fetchComponentData(store.dispatch, renderProps.components, renderProps.params)
             .then(() => {
               console.log("GOT DATA, RENDERING COMPONENTS")
               res.send(renderFullPage(renderHtml(), store.getState()))
             })
-            .catch(err => res.end(err.message));
+            .catch(err => {
+              console.log(err);
+              return res.end(err.message)
+            });
 
           // res.send(renderFullPage(renderHtml(), store.getState()));
         }
