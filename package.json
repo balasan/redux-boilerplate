@@ -52,7 +52,7 @@
     "serve-static": "^1.10.0",
     "socket.io": "^1.4.6",
     "socket.io-client": "^1.4.6",
-    "superagent": "^1.8.3"
+    "superagent": "^6.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.1.1",
